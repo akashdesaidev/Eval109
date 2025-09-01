@@ -12,7 +12,7 @@ async def startup_db_clien():
         await conn.run_sync(Base.metadata.create_all)
 
 app.include_router(userRouter.router)
-app.include_router(transactionRouter.router)
+app.include_router(transactionsRouter.router)
 
 
 @app.get("/")
