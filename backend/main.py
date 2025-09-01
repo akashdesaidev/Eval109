@@ -1,18 +1,18 @@
 from fastapi import FastAPI
 import uvicorn
-from router import userRouter,transactionsRouter
+from router import userRouter, transactionsRouter, transferRouter
 from db.db import engine, Base
    
 app = FastAPI()
 
-app.on_event("startup")
-async def startup_db_clien():
-
+@app.on_event("startup")
+async def startup_db_client():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
 
 app.include_router(userRouter.router)
 app.include_router(transactionsRouter.router)
+app.include_router(transferRouter.router)
 
 
 @app.get("/")
