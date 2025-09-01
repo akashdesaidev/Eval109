@@ -21,7 +21,7 @@ class TransactionServices():
             self.db.commit()
         else:
             self.db.rollback()
-        self.db.refresh(user)
+        self.db.refresh(transaction)
         return transaction
      
 
@@ -37,7 +37,7 @@ class TransactionServices():
             self.db.commit()
         else:
             self.db.rollback()
-        self.db.refresh(user)
+        self.db.refresh(transaction)
         return transaction
 
     def transfer(self, from_user_id: int, to_user_id: int, amount: float, description: str):
@@ -61,8 +61,7 @@ class TransactionServices():
             self.db.refresh(to_user)
         else:
             self.db.rollback()
-            self.db.refresh(from_user)
-            self.db.refresh(to_user)
+            self.db.refresh(from_user_transaction)
             return None
         return from_user_transaction
 
@@ -85,4 +84,5 @@ class TransactionServices():
 
         )
         self.db.add(transaction)
+        self.db.refresh(transaction)
         return transaction
