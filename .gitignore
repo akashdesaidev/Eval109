@@ -1,0 +1,8 @@
+*.env
+
+.venv/
+__pycache__/
+
+*.db
+Back3\Db\Database.db
+Backend2\db\database.db
